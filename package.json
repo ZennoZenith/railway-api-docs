@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "dev": "vitepress --host 0.0.0.0 dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.3",
+    "@vue/tsconfig": "^0.5.1",
+    "vitepress": "^1.0.0-rc.35"
+  },
+  "dependencies": {
+    "http-status-codes": "^2.3.0"
+  }
+}
