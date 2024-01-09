@@ -64,14 +64,18 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/ZennoZenith' },
+      {
+        icon: 'github',
+        link: 'https://github.com/ZennoZenith/railway-api-docs',
+      },
       {
         icon: 'linkedin',
         link: 'https://www.linkedin.com/in/m-bakhtiyar-ali/',
       },
     ],
     editLink: {
-      pattern: 'https://github.com/vuejs/vitepress/edit/main/docs/:path',
+      pattern:
+        'https://github.com/ZennoZenith/railway-api-docs/edit/main/docs/:path',
     },
   },
 })
