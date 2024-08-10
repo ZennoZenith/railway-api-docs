@@ -3,7 +3,7 @@ outline: deep
 lastUpdated: true
 editLink: true
 lang: en-US
-basePath: api.railwayapi.site
+basePath: api.railway.zennozenith.com
 prev: true
 ---
 
@@ -11,31 +11,23 @@ prev: true
 
 ## GET /states
 
-    Base path: {{$frontmatter.basePath}}
+Base path: {{$frontmatter.basePath}}
 
 ### Summary
 
-Get states
+Get list of all states
 
 ### URL
 
-    `/api/v1/states?q={queryString}`
-    `/api/v1/states/all` (will give all states)
-
-### Request Query Parameters:
-
-| Parameters | Required? | Description                  |
-| ---------- | --------- | ---------------------------- |
-| q          | required  | find states like queryString |
+`/v1/states`
 
 ### Usage Example:
 
-    {{$frontmatter.basePath}}/api/v1/states?q=pradesh
-    {{$frontmatter.basePath}}/api/v1/states/all
+- {{$frontmatter.basePath}}/v1/states
 
 ### Possible errors
 
-- [NotFound](../errorcodes#NotFound) : No state found for given queryString
+- [NotFound](/errorcodes#NotFound) : No state found
 
 ### Response
 
@@ -49,54 +41,32 @@ List of states
 ### Sample response
 
 ```json
-{
-  "data": [
-    {
-      "stateName": "Andhra Pradesh"
-    },
-    {
-      "stateName": "Arunachal Pradesh"
-    },
-    {
-      "stateName": "Himachal Pradesh"
-    },
-    {
-      "stateName": "Madhya Pradesh"
-    },
-    {
-      "stateName": "Uttar Pradesh"
-    }
-  ]
-}
+[
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  ...
+]
 ```
 
 ## GET /zones
 
-    Base path: {{$frontmatter.basePath}}
+Base path: {{$frontmatter.basePath}}
 
 ### Summary
 
-Get zones
+Get all zones
 
 ### URL
 
-    `/api/v1/zones?q={queryString}`
-    `/api/v1/zones/all` (will give all zones)
-
-### Request Query Parameters:
-
-| Parameters | Required? | Description                 |
-| ---------- | --------- | --------------------------- |
-| q          | required  | find zones like queryString |
+`/v1/zones`
 
 ### Usage Example:
 
-    {{$frontmatter.basePath}}/api/v1/zones?q=north
-    {{$frontmatter.basePath}}/api/v1/zones/all
+- {{$frontmatter.basePath}}/v1/zones
 
 ### Possible errors
 
-- [NotFound](../errorcodes#NotFound) : No zone found for given queryString
+- [NotFound](/errorcodes#NotFound) : No zone found
 
 ### Response
 
@@ -105,64 +75,51 @@ Get zones
 
 ### Response Body
 
-List of zones
+List of all zones
 
 ### Sample response
 
 ```json
-{
-  "data": [
-    {
-      "zoneName": "North Central Railway",
-      "zoneCode": "NCR"
-    },
-    {
-      "zoneName": "North Eastern Railway",
-      "zoneCode": "NER"
-    },
-    {
-      "zoneName": "North Western Railway",
-      "zoneCode": "NWR"
-    },
-    {
-      "zoneName": "Northeast Frontier Railway",
-      "zoneCode": "NFR"
-    },
-    {
-      "zoneName": "Northern Railway",
-      "zoneCode": "NR"
-    }
-  ]
-}
+[
+  {
+    "zoneCode": "BR",
+    "zoneName": "Bangladesh"
+  },
+  {
+    "zoneCode": "CR",
+    "zoneName": "Central Railway"
+  },
+  {
+    "zoneCode": "NCR",
+    "zoneName": "North Central Railway"
+  },
+  {
+    "zoneCode": "NER",
+    "zoneName": "North Eastern Railway"
+  },
+  ...
+]
 ```
 
 ## GET /trainTypes
 
-    Base path: {{$frontmatter.basePath}}
+Base path: {{$frontmatter.basePath}}
 
 ### Summary
 
-Get states
+Get all train types
 
 ### URL
 
-    `/api/v1/trainTypes?q={queryString}`
-    `/api/v1/trainTypes/all` (will give all train types)
-
-### Request Query Parameters:
-
-| Parameters | Required? | Description                      |
-| ---------- | --------- | -------------------------------- |
-| q          | required  | find train type like queryString |
+`/v1/train_types`
 
 ### Usage Example:
 
-    {{$frontmatter.basePath}}/api/v1/trainType?q=exp
-    {{$frontmatter.basePath}}/api/v1/trainType/all
+- {{$frontmatter.basePath}}/v1/train_types
 
 ### Possible errors
 
-- [NotFound](../errorcodes#NotFound) : No train type found for given queryString
+- [NotFound](/errorcodes#NotFound) : No train type found
 
 ### Response
 
@@ -176,12 +133,19 @@ List of train types
 ### Sample response
 
 ```json
-{
-  "data": [
-    {
-      "trainTypeCode": "EXP",
-      "trainTypeName": "Mail/Express"
-    }
-  ]
-}
+[
+  {
+    "trainTypeCode": "ANT",
+    "trainTypeName": "Antyodaya"
+  },
+  {
+    "trainTypeCode": "DEMU",
+    "trainTypeName": "DEMU"
+  },
+  {
+    "trainTypeCode": "DRNT",
+    "trainTypeName": "Duronto"
+  },
+  ...
+]
 ```

@@ -21,7 +21,7 @@ For all methods which accept or return structured data, uses JSON format.
 The URLs for the various resources use the following pattern:
 
 ```
-https://api.railwayapi.site/api/v<version>/<operation-specific component>
+https://api.railway.zennozenith.com/v<version>/<operation-specific component>
 ```
 
 The components of the URL are:

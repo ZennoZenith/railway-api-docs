@@ -38,20 +38,11 @@ readable error description. The format of this error entity is below:
 
 ```json
 {
-  "errors": {
-    "httpCode": 429,
-    "code": "ERR-0002",
-    "type": "TooManyReqeust",
-    "title": "Too many request",
-    "description": "Too many request. Check Ratelimit-Reset header for reset rate limit time or contact developer.",
-    "href": "https://docs.railwayapi.site/errorcodes#TooManyReqeust",
-    "extra": {
-      "retryAfter": 2010210370,
-      "message": "MONTHLY LIMIT EXCEEDED",
-      "path": "/api/v1/trains/12650",
-      "method": "GET"
-    }
-  }
+  "httpCode": 400,
+  "errorCode": 4,
+  "title": "Limit Out of Range",
+  "error": "Limit value passed: 100",
+  "href": "https://railway.zennozenith.com/errorcodes#LimitOutOfRange"
 }
 ```
 

@@ -3,13 +3,13 @@ outline: deep
 lastUpdated: true
 editLink: true
 lang: en-US
-basePath: api.railwayapi.site
+basePath: api.railway.zennozenith.com
 prev: true
 ---
 
 # GET /stations/\{stationCodes}
 
-    Base path: {{$frontmatter.basePath}}
+Base path: {{$frontmatter.basePath}}
 
 ## Summary
 
@@ -17,26 +17,23 @@ Get station info for given station code(s)
 
 ## URL
 
-`/api/v1/stations/{stationCodes}`
+`/v1/stations/{stationCode}`
 
 ## Request URL Parameters:
 
-| Parameters   | Required? | Description                             |
-| ------------ | --------- | --------------------------------------- |
-| stationCodes | required  | one or more stationCode seperate by ',' |
-
-_Note: Maximum station codes limit is 10._
+| Parameters  | Required? | Description  |
+| ----------- | --------- | ------------ |
+| stationCode | required  | station code |
 
 ## Usage Example:
 
-    {{$frontmatter.basePath}}/api/v1/stations/KIR
-    {{$frontmatter.basePath}}/api/v1/stations/KIR,NZM
+- {{$frontmatter.basePath}}/v1/stations/KIR
 
 ## Possible errors
 
-- [NotFound](../errorcodes#NotFound) : No station found for given `stationCodes`
+- [NotFound](/errorcodes#NotFound) : No station found for given `stationCode`
 
-## Response
+## Response HTTP code
 
     On success, 200
     On not found, 404
@@ -45,25 +42,40 @@ _Note: Maximum station codes limit is 10._
 
 List of station info
 
+## Response Body Structure
+
+```typescript
+type T = {
+  id: Number;
+  stationCode: String;
+  stationName: String;
+  stateName: String;
+  zoneCode: String;
+  stationAlternateText: String;
+  stationType: String;
+  numberOfPlatforms: Number;
+  hindiStationName: String;
+  latitude: String | null;
+  longitude: String | null;
+  updatedAt: String;
+};
+```
+
 ## Sample response
 
 ```json
 {
-  "data": [
-    {
-      "id": 549,
-      "stationCode": "KIR",
-      "stationName": "Katihar Junction",
-      "stateName": "Bihar",
-      "stationType": "Junction",
-      "numberOfPlatforms": 9,
-      "hindiStationName": "कटिहार जंक्शन",
-      "updatedAt": "2023-03-24 17:30:42",
-      "zone": {
-        "zoneName": "Northeast Frontier Railway",
-        "zoneCode": "NFR"
-      }
-    }
-  ]
+  "id": 550,
+  "stationCode": "KIR",
+  "stationName": "Katihar Junction",
+  "stateName": "Bihar",
+  "zoneCode": "NFR",
+  "stationAlternateText": "کٹیہار جنکشن     कटिहार जंक्शन",
+  "stationType": "junction",
+  "numberOfPlatforms": 9,
+  "hindiStationName": "कटिहार जंक्शन",
+  "latitude": "25.5479300550115000",
+  "longitude": "87.5655949115753000",
+  "updatedAt": "2024-08-04T12:06:52.807Z"
 }
 ```

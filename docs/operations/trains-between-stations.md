@@ -3,7 +3,7 @@ outline: deep
 lastUpdated: true
 editLink: true
 lang: en-US
-basePath: api.railwayapi.site
+basePath: api.railway.zennozenith.com
 prev: true
 ---
 
@@ -17,7 +17,7 @@ Get trains between stations
 
 ## URL
 
-`/api/v1/trainsBtwStations?fromStation={fromStationCode}&toStation={toStationCode}&allTrains={true/false}`
+`/v1/trainsBtwStations?fromStation={fromStationCode}&toStation={toStationCode}&allTrains={true/false}`
 
 ## Request Query Parameters:
 
@@ -27,17 +27,19 @@ Get trains between stations
 | toStation   | required                | Train running to stationCode                                    |
 | allTrains   | optional, default=false | include local train and some not currently running trains also. |
 
+::: warning
+[Bad Request](/errorcodes#BadRequest) error response will be given if allTrains is any value other than `true` or `false`
+:::
+
 ## Usage Example:
 
-    {{$frontmatter.basePath}}/api/v1/trainsBtwStations?fromStation=GWL&toStation=HWH
-    {{$frontmatter.basePath}}/api/v1/trainsBtwStations?fromStation=GWL&toStation=HWH&allTrains=true
+- {{$frontmatter.basePath}}/api/v1/trainsBtwStations?fromStation=GWL&toStation=HWH
+- {{$frontmatter.basePath}}/api/v1/trainsBtwStations?fromStation=GWL&toStation=HWH&allTrains=true
 
 ## Possible errors
 
-- [NotFound](../errorcodes#NotFound) : No trains found between given stations
-- [QueryParameterUnspecified](../errorcodes#QueryParameterUnspecified) : Some
-  query parameters are not provided or not stations matched give query
-  parameters
+- [NotFound](/errorcodes#NotFound) : No trains found between given stations
+- [BadRequest](/errorcodes#BadRequest) : Some query parameters are not provided or not stations matched give query parameters
 
 ## Response
 
@@ -52,204 +54,124 @@ List of trains running between given station and list of station info
 ## Sample response
 
 ```json
-{
-  "data": [
-    {
-      "id": 564,
-      "trainNumber": "12176",
-      "trainName": "CHAMBAL EXPRESS",
-      "trainFullName": "Gwalior - Howrah Chambal Express",
-      "trainRunsOn": {
-        "sunday": false,
-        "monday": false,
-        "tueday": true,
-        "wednesday": false,
-        "thursday": false,
-        "friday": false,
-        "saturday": true
-      },
-      "availableClasses": [
-        "2A",
-        "3A",
-        "SL",
-        "GN"
-      ],
-      "boardingDisabled": false,
-      "hasPantry": false,
-      "trainType": "SF",
-      "returnTrainNumber": "12175",
-      "stationFrom": {
-        "id": 736,
-        "srNo": 1,
-        "arrivalTime": null,
-        "departureTime": "07:40:00",
-        "haltTime": null,
-        "platform": "1",
-        "dayCount": 1,
-        "distance": "0.0",
-        "speed": "0.0",
-        "boardingDisabled": 0,
-        "updatedAt": "2023-03-24T12:00:43.000Z",
-        "stationCode": "GWL",
-        "stationName": "Gwalior Junction"
-      },
-      "stationTo": {
-        "id": 1,
-        "srNo": 30,
-        "arrivalTime": "06:55:00",
-        "departureTime": null,
-        "haltTime": null,
-        "platform": "12,14",
-        "dayCount": 2,
-        "distance": "1286.2",
-        "speed": "62.8",
-        "boardingDisabled": 0,
-        "updatedAt": "2023-03-24T12:00:43.000Z",
-        "stationCode": "HWH",
-        "stationName": "Howrah Junction"
-      },
-      "updatedAt": "2023-03-24T12:00:42.000Z",
-      "distance": 1286,
-      "duration": "23h 15m"
+[
+  {
+    "trainId": 564,
+    "trainNumber": "12176",
+    "trainName": "CHAMBAL EXPRESS",
+    "trainFullName": "Gwalior - Howrah Chambal Express",
+    "trainRunningDays": {
+      "sunday": false,
+      "monday": false,
+      "tueday": true,
+      "wednesday": false,
+      "thursday": false,
+      "friday": false,
+      "saturday": true
     },
-    {
-      "id": 566,
-      "trainNumber": "12178",
-      "trainName": "CHAMBAL EXPRESS",
-      "trainFullName": "Mathura - Howrah Chambal Express",
-      "trainRunsOn": {
-        "sunday": false,
-        "monday": true,
-        "tueday": false,
-        "wednesday": false,
-        "thursday": false,
-        "friday": false,
-        "saturday": false
-      },
-      "availableClasses": [
-        "2A",
-        "3A",
-        "SL",
-        "GN"
-      ],
+    "availableClasses": [
+      "2A",
+      "3A",
+      "SL",
+      "GN"
+    ],
+    "hasPantry": false,
+    "trainTypeCode": "SF",
+    "returnTrainNumber": "12175",
+    "distance": 1286.2,
+    "durationSec": 2700,
+    "stationFrom": {
+      "srNo": "1",
+      "stationId": 737,
+      "stationCode": "GWL",
+      "stationName": "Gwalior Junction",
+      "stationType": "junction",
+      "arrivalTime": "07:40:00",
+      "departureTime": "07:40:00",
+      "haltTimeSec": 0,
+      "platform": "1",
+      "dayCount": 1,
+      "distance": 0,
+      "speed": 0,
       "boardingDisabled": false,
-      "hasPantry": false,
-      "trainType": "SF",
-      "returnTrainNumber": "12177",
-      "stationFrom": {
-        "id": 736,
-        "srNo": 5,
-        "arrivalTime": "07:35:00",
-        "departureTime": "07:40:00",
-        "haltTime": "00:05:00",
-        "platform": "1",
-        "dayCount": 1,
-        "distance": "171.9",
-        "speed": "50.3",
-        "boardingDisabled": 0,
-        "updatedAt": "2023-03-24T12:00:43.000Z",
-        "stationCode": "GWL",
-        "stationName": "Gwalior Junction"
-      },
-      "stationTo": {
-        "id": 1,
-        "srNo": 34,
-        "arrivalTime": "06:55:00",
-        "departureTime": null,
-        "haltTime": null,
-        "platform": "12,14",
-        "dayCount": 2,
-        "distance": "1458.2",
-        "speed": "62.8",
-        "boardingDisabled": 0,
-        "updatedAt": "2023-03-24T12:00:43.000Z",
-        "stationCode": "HWH",
-        "stationName": "Howrah Junction"
-      },
-      "updatedAt": "2023-03-24T12:00:42.000Z",
-      "distance": 1286,
-      "duration": "23h 15m"
+      "updatedAt": "2024-08-04T12:06:52.807Z"
     },
-    {
-      "id": 2691,
-      "trainNumber": "20976",
-      "trainName": "CHAMBAL EXP",
-      "trainFullName": "Agra Cantt. - Howrah Chambal Express",
-      "trainRunsOn": {
-        "sunday": false,
-        "monday": false,
-        "tueday": false,
-        "wednesday": false,
-        "thursday": true,
-        "friday": false,
-        "saturday": false
-      },
-      "availableClasses": [
-        "2A",
-        "3A",
-        "SL",
-        "GN"
-      ],
+    "stationTo": {
+      "srNo": "30",
+      "stationId": 2,
+      "stationCode": "HWH",
+      "stationName": "Howrah Junction",
+      "stationType": "terminus",
+      "arrivalTime": "06:55:00",
+      "departureTime": "06:55:00",
+      "haltTimeSec": 0,
+      "platform": "12,14",
+      "dayCount": 2,
+      "distance": 1286.2,
+      "speed": 62.8,
       "boardingDisabled": false,
-      "hasPantry": false,
-      "trainType": "SF",
-      "returnTrainNumber": "20975",
-      "stationFrom": {
-        "id": 736,
-        "srNo": 4,
-        "arrivalTime": "07:35:00",
-        "departureTime": "07:40:00",
-        "haltTime": "00:05:00",
-        "platform": "1",
-        "dayCount": 1,
-        "distance": "118.2",
-        "speed": "50.5",
-        "boardingDisabled": 0,
-        "updatedAt": "2023-03-24T12:00:43.000Z",
-        "stationCode": "GWL",
-        "stationName": "Gwalior Junction"
-      },
-      "stationTo": {
-        "id": 1,
-        "srNo": 33,
-        "arrivalTime": "06:55:00",
-        "departureTime": null,
-        "haltTime": null,
-        "platform": "12,14",
-        "dayCount": 2,
-        "distance": "1404.4",
-        "speed": "62.8",
-        "boardingDisabled": 0,
-        "updatedAt": "2023-03-24T12:00:43.000Z",
-        "stationCode": "HWH",
-        "stationName": "Howrah Junction"
-      },
-      "updatedAt": "2023-03-24T12:00:42.000Z",
-      "distance": 1286,
-      "duration": "23h 15m"
-    }
-  ],
-  "extra": {
-    "stationsInfo": [
-      {
-        "id": 736,
-        "stationCode": "GWL",
-        "stationName": "Gwalior Junction",
-        "stateName": "Madhya Pradesh",
-        "zoneCode": "NCR",
-        "stationType": "Junction",
-        "hindiStationName": "ग्वालियर जंक्शन"
-      },
-      {
-        "id": 1,
-        "stationCode": "HWH",
-        "stationName": "Howrah Junction",
-        "stateName": "West Bengal",
-        "zoneCode": "ER",
-        "stationType": "Terminus",
-        "hindiStationName": "हावड़ा जंक्शन"
-      }
-    ]
+      "updatedAt": "2024-08-04T12:06:52.807Z"
+    },
+    "updatedAt": "2024-08-04T12:06:52.807Z"
+  },
+  {
+    "trainId": 566,
+    "trainNumber": "12178",
+    "trainName": "CHAMBAL EXPRESS",
+    "trainFullName": "Mathura - Howrah Chambal Express",
+    "trainRunningDays": {
+      "sunday": false,
+      "monday": true,
+      "tueday": false,
+      "wednesday": false,
+      "thursday": false,
+      "friday": false,
+      "saturday": false
+    },
+    "availableClasses": [
+      "2A",
+      "3A",
+      "SL",
+      "GN"
+    ],
+    "hasPantry": false,
+    "trainTypeCode": "SF",
+    "returnTrainNumber": "12177",
+    "distance": 1286.2999,
+    "durationSec": 2700,
+    "stationFrom": {
+      "srNo": "5",
+      "stationId": 737,
+      "stationCode": "GWL",
+      "stationName": "Gwalior Junction",
+      "stationType": "junction",
+      "arrivalTime": "07:35:00",
+      "departureTime": "07:40:00",
+      "haltTimeSec": 300,
+      "platform": "1",
+      "dayCount": 1,
+      "distance": 171.9,
+      "speed": 50.3,
+      "boardingDisabled": false,
+      "updatedAt": "2024-08-04T12:06:52.807Z"
+    },
+    "stationTo": {
+      "srNo": "34",
+      "stationId": 2,
+      "stationCode": "HWH",
+      "stationName": "Howrah Junction",
+      "stationType": "terminus",
+      "arrivalTime": "06:55:00",
+      "departureTime": "06:55:00",
+      "haltTimeSec": 0,
+      "platform": "12,14",
+      "dayCount": 2,
+      "distance": 1458.2,
+      "speed": 62.8,
+      "boardingDisabled": false,
+      "updatedAt": "2024-08-04T12:06:52.807Z"
+    },
+    "updatedAt": "2024-08-04T12:06:52.807Z"
   }
-}
+]
 ```

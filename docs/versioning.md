@@ -20,7 +20,7 @@ incorporating the major version, using the following pattern (relative to the
 base URL):
 
 ```
-/api/v{major version number}/{operation-specific component}
+/v{major version number}/{operation-specific component}
 ```
 
 Minor version numbers are incremented when backwards-compatible changes occur.

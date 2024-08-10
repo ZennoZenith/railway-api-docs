@@ -22,8 +22,8 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: 'https://railwayapi.site' },
-      { text: 'Api Wrappers', link: '/wrappers' },
+      { text: 'Home', link: 'https://railway.zennozenith.com' },
+      { text: 'Demo', link: 'https://demo.railway.zennozenith.com' },
     ],
 
     sidebar: [
@@ -32,20 +32,21 @@ export default defineConfig({
       { text: 'Error Codes', link: '/errorcodes' },
       { text: 'Response Codes', link: '/responsecodes' },
       { text: 'Versioning', link: '/versioning' },
+      { text: 'Rate Limiting', link: '/rate-limiting' },
       {
         text: 'Operations',
         link: 'operations',
         items: [
+          { text: 'GET /stations', link: '/operations/station-list' },
+          {
+            text: 'GET /stations/{stationCode}',
+            link: '/operations/station-info',
+          },
           { text: 'GET /trains', link: '/operations/train-list' },
           { text: 'GET /trains/{trainNumber}', link: '/operations/train-info' },
           {
             text: 'GET /schedules/{trainNumber}',
             link: '/operations/schedule',
-          },
-          { text: 'GET /stations', link: '/operations/station-list' },
-          {
-            text: 'GET /stations/{stationCode}',
-            link: '/operations/station-info',
           },
           {
             text: 'GET /trainsBtwStations',
@@ -81,5 +82,5 @@ export default defineConfig({
 })
 
 export const Extra = {
-  'basePath': 'api.railwayapi.site',
+  'basePath': 'api.railway.zennozenith.com',
 } as const

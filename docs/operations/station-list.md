@@ -3,13 +3,13 @@ outline: deep
 lastUpdated: true
 editLink: true
 lang: en-US
-basePath: api.railwayapi.site
+basePath: api.railway.zennozenith.com
 prev: true
 ---
 
 # GET /stations
 
-    Base path: {{$frontmatter.basePath}}
+Base path: {{$frontmatter.basePath}}
 
 ## Summary
 
@@ -17,27 +17,38 @@ Get list of stations for given query string
 
 ## URL
 
-`/api/v1/stations?q={queryStiring}&limit={limit}`
+`/v1/stations?q={queryStiring}&stationCode={stationCode}&limit={limit}`
 
 ## Request Query Parameters:
 
-| Parameters | Required?                       | Description                        |
-| ---------- | ------------------------------- | ---------------------------------- |
-| q          | (required)                      | query string to find like stations |
-| limit      | (optional, default=10, max=100) | limit number of stations           |
+| Parameters  | Required?                      | Description                            |
+| ----------- | ------------------------------ | -------------------------------------- |
+| q           | partial required               | query string to find like stations     |
+| stationCode | partial required               | query string to find like station code |
+| limit       | (optional, default=10, max=50) | limit number of stations               |
+
+::: warning
+If both `q` and `stationCode` is provided, `q` will take precedence.
+:::
+
+::: warning
+
+- [Limit Out Of Range](/errorcodes#LimitOutOfRange) error response will be given if limit is not in range
+- [Bad Request](/errorcodes#BadRequest) error response will be given if limit is not a **positive integer**
+  :::
 
 ## Usage Example:
 
-    {{$frontmatter.basePath}}/api/v1/stations?q=ki
-    {{$frontmatter.basePath}}/api/v1/stations?q=k&limit=50
+- {{$frontmatter.basePath}}/v1/stations?q=kati
+- {{$frontmatter.basePath}}/v1/stations?q=k&limit=50
+- {{$frontmatter.basePath}}/v1/stations?stationCode=ki
 
 ## Possible errors
 
-- [NotFound](../errorcodes#NotFound) : No station found for given queryString
-- [QueryParameterUnspecified](../errorcodes#QueryParameterUnspecified) : Query
-  string is not specified
+- [NotFound](/errorcodes#NotFound) : No station found for given queryString
+- [Bad Request](/errorcodes#BadRequest) : Query parameter is invalid string or is not specified
 
-## Response
+## Response HTTP code
 
     On success, 200
     On not found, 404
@@ -47,61 +58,38 @@ Get list of stations for given query string
 
 List of stations
 
+## Response Body Structure
+
+```typescript
+Array<{
+  id: Number;
+  stationCode: String;
+  stationName: String;
+  stationType: String;
+}>;
+```
+
 ## Sample response
 
 ```json
-{
-  "data": [
-    {
-      "id": 1868,
-      "stationCode": "KI",
-      "stationName": "Kondapalli"
-    },
-    {
-      "id": 2296,
-      "stationCode": "KIN",
-      "stationName": "Kapasan"
-    },
-    {
-      "id": 1893,
-      "stationCode": "KIM",
-      "stationName": "Kim"
-    },
-    {
-      "id": 222,
-      "stationCode": "KIT",
-      "stationName": "Khallikot"
-    },
-    {
-      "id": 1424,
-      "stationCode": "KID",
-      "stationName": "Khairar Junction"
-    },
-    {
-      "id": 329,
-      "stationCode": "KIUL",
-      "stationName": "Kiul Junction"
-    },
-    {
-      "id": 2797,
-      "stationCode": "KITA",
-      "stationName": "Kita"
-    },
-    {
-      "id": 549,
-      "stationCode": "KIR",
-      "stationName": "Katihar Junction"
-    },
-    {
-      "id": 2132,
-      "stationCode": "KIP",
-      "stationName": "Khalilpur"
-    },
-    {
-      "id": 2503,
-      "stationCode": "KIS",
-      "stationName": "Kapilas Road Junction"
-    }
-  ]
-}
+[
+  {
+    "id": 1720,
+    "stationCode": "KATI",
+    "stationName": "Kanthi",
+    "stationType": "regular"
+  },
+  {
+    "id": 550,
+    "stationCode": "KIR",
+    "stationName": "Katihar Junction",
+    "stationType": "junction"
+  },
+  {
+    "id": 8068,
+    "stationCode": "KATA",
+    "stationName": "Katili",
+    "stationType": "regular"
+  }
+]
 ```

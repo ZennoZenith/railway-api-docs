@@ -4,8 +4,8 @@ lastUpdated: true
 editLink: true
 lang: en-US
 prev:
-  text: 'GET /trains'
-  link: '/operations/train-list'
+  text: 'Introduction'
+  link: '/introduction'
 next: 
   text: 'NodeJs'
   link: '/wrappers/nodejs'
